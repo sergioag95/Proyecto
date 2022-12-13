@@ -1,109 +1,259 @@
 <!DOCTYPE html>
-<head th:insert="librerias::librerias">
-	<script>
-    $('#modal-delete').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        $('#modal-deleteHiddenId').val($(this).find('.btn-ok').attr('href'));
-    });
-</script>
+<head>
+	
+	<div th:insert="librerias::librerias"></div>
+	
 </head>
-
 <body>
-	<div class="container">
-	<header>
-		<div th:insert="top::top"></div>
-	</header>
 
-	<h1>Usuarios en Spring</h1>
+<div class="container"> 
 
-	<!--IMPRIMIR TABLA Usuarios -->
+<header>
+
+	<div th:insert="top::top"></div>
+
+</header>
+
+<h1>Equipos en Spring</h1>
+
+
+	<!-- IMPRIMIR TABLA ALUMNOS -->
 	
 	<table class="table table-hover">
 		<thead class="table-dark bg-info text-white">
 			<tr>
-				<th>Id </th>
-				<th>Usuario </th>
-				<th>Editar </th>
-				<th>Borrar </th>
+				<th> ID </th>
+				<th> Ciudad </th>
+				<th> Nombre </th>
+				<th> Editar </th>
+				<th> Borrar </th>
 			</tr>
-		
+			
 		</thead>
 		<tbody>
+			
 		<!-- EL MEOLLO -->
-		<tr th:if=" ${listaUsuarios.empty}">
-			<td colspan ="2">No hay Usuarios</td>
-		</tr>
-		<tr th:each="Usuario:${listaUsuarios}">
 		
-		<td>
-			<a th:href="@{/Usuarios/{id}(id=${Usuario.id})}" class="btn btn-primary btn-sm">
-			<span th:text="${Usuario.id}"></span>
-			</a>
-		</td>
-		
-		<td>
-			<span th:text="${Usuario.usuario}"></span>
-
-		</td>
-		
-		<td>
-			<a th:attr="data-target='#modal-edit'+${Usuario.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
-		</td>
-		
-		<td>
-			<a th:attr="data-target='#modal-delete'+${Usuario.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-primary btn-sm text-white pointer">Borrar</a>
-		</td>
-		
-		<!-- edit modal -->
-		<div class="modal-fade" th:id="modal-edit+$(Usuario.id)">
-		
-			<div class="modal-dialog" role="document">
+			<tr th:if=" ${listaEquipos.empty}">
+				<td colspan="2"> No hay equipos</td>
+			</tr>
 			
-			<div class="modal-content">
-
+			<tr th:each="equipo:${listaEquipos}">
 			
-				<div class="modal-header">
+				<td>
+					<a th:href="@{/equipos/{id}(id=${equipo.id})}" class="btn btn-primary btn-sm">
+						<span th:text="${equipo.id}"></span>
+					</a>
+				</td>
 				
-					<h4 class="modal-tittle" id="exampleModalLabel">Editar</h4>
+				<td>
+					<span th:text="${equipo.ciudad}"></span>
+				</td>
+				
+				<td>
+					<span th:text="${equipo.nombre}"></span>
+				</td>
+				
+				<td>
+					<a th:attr="data-target='#modal-edit'+${equipo.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
+				</td>
+				
+				<td>
+					<a th:attr="data-target='#modal-delete'+${equipo.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+				</td>
+				
+				
+				<!--edit modal -->
+				
+				<div class="modal fade" th:id="modal-edit+${equipo.id}">
 					
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+				<div class="modal-dialog" role="document">
+				
+					<div class="modal-content">
+				
+					<div class="modal-header">
+					
+						<h4 class="modal-title" id="exampleModalLabel">Editar</h4>
+						
+						<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="close">
+					
 						<span aria-hidden="true">x</span>
-					</button>
+						</button>
+						
+					</div>
 					
-				</div>
-				
-				<div class="modal-body">
-					<p class="error-text">Introduce el nombre de usuario nuevo para el Usuario/a:
-					<strong><span th:text="${Usuario.usuario}"></span></strong>
-					</p>
+					<div class="modal-body">
 					
-					<!--Formulario nombre a editar -->
-					<form action="#" th:action="@{/Usuarios/edit/{id}(id=${Usuario.id})}" th:object="${UsuarioaEditar}" method="post">
-					
-					<div class="form-row">
-					
-						<div class="form-group mt-1">
-							<label for="texto">Nombre</label>
-							<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${Usuario.nombre}">
+						<p class="error-text">Introduce de la nueva ciudad para el equipo:
+							<strong><span th:text="${equipo.nombre}"></span></strong>
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+						<form action="#" th:action="@{/equipos/edit/{id}(id=${equipo.id})}" th:object="${equipoaEditar}" method="post">
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Ciudad</label>
+									<input type="text" th:field="*{ciudad}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${equipo.ciudad}"/>
+								
+								</div>
+								
+							</div>
+							
+						<p class="error-text">Introduce el nombre de equipo nuevo para equipo/a:
+							<strong><span th:text="${equipo.nombre}"></span></strong>
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+						<form action="#" th:action="@{/equipos/edit/{id}(id=${equipo.id})}" th:object="${equipoaEditar}" method="post">
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Nombre de Equipo</label>
+									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${equipo.nombre}"/>
+								
+								</div>
+								
+							</div>
+						
+						
+						
 						</div>
+							
+						<div class="modal-footer">
+							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
+							<input type="submit" value="Editar" class="btn btn-primary float-right"/>
+						</div>
+							
+						
+						</form>
+					
 					</div>
-	
-					</form>
 					
 				</div>
-				<div class="modal-footer">
-						<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden = "true">Cancelar</button>
-						<input type="submit" value="Editar" class="btn btn-primary float right">
-					</div>
-			</div>
-			</div>
-		</div>
-		<!-- fin edit modal-->
 				
-				</tr>
-			</tbody>
+				</div>
+				
+				<!-- fin edit modal -->
+				
+				<!--delete modal -->
+				
+				<div class="modal fade" th:id="modal-delete+${equipo.id}">
+					
+				<div class="modal-dialog" role="document">
+				
+					<div class="modal-content">
+				
+					<div class="modal-header">
+					
+						<h4 class="modal-title" id="exampleModalLabel">Eliminar</h4>
+						
+						<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="close">
+					
+						<span aria-hidden="true">x</span>
+						</button>
+						
+					</div>
+					
+					<div class="modal-body">
+					
+						<p class="error-text"> ¿Está seguro de eliminar al equipo? :
+							<strong><span th:text="${equipo.nombre}"></span></strong>?
+						</p>
+						
+						<!-- formulario nombre a eliminar -->
+						
+						
+					</div>
+							
+						<div class="modal-footer">
+							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
+							<a th:href="@{/equipos/delete/{id}(id=${equipo.id})}">
+								<span class="btn btn-danger btn-sm" value="delete"> Borrar </span>
+							</a>
+						</div>
+							
+					
+					</div>
+				</div>
+				</div>
+				
+				<!-- fin delete modal -->
+				
+			</tr>
+			
+		</tbody>
 	
-		</table>
 	
+	
+	</table>
+	
+	<div class="col-2 float-right">
+	
+		<div class="p-5">
+			<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#crearMensaje">
+				Añadir
+				<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+				   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+				   <line x1="12" y1="5" x2="12" y2="19"></line>
+				   <line x1="5" y1="12" x2="19" y2="12"></line>
+</svg>
+			</button>
+		</div>
 	</div>
+	
+	<!--create modal -->
+				
+				<div class="modal fade" id="crearMensaje">
+					
+				<div class="modal-dialog" role="document">
+				
+					<div class="modal-content">
+				
+					<div class="modal-header">
+					
+						<h4 class="modal-title" id="exampleModalLabel">Crear Equipo</h4>
+						
+						<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="close">
+					
+						<span aria-hidden="true">x</span>
+						</button>
+						
+					</div>
+					
+					<div class="modal-body">
+					
+						<p class="error-text">Introduce el nombre nuevo para nuevo equipo: </p>
+						
+						<!-- formulario nombre a editar -->
+						
+						<form action="#" th:action="@{/equipos/add/}" th:object="${equipoNuevo}" method="post">
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Nombre</label>
+									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" placeholder="nombre"/>
+								</div>
+								
+							</div>
+						</div>
+							
+						<div class="modal-footer">
+							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
+							<input type="submit" value="Crear" class="btn btn-primary float-right"/>
+						</div>
+							
+						
+						</form>
+					
+					</div>
+					
+				</div>
+				
+				</div>
+				
+	<!-- fin create modal -->
+	
+</div>	
 </body>
+

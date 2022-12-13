@@ -46,6 +46,9 @@ public class EquipoController{
 		
 		equipoaEditar.setNombre(EquipoEditado.getNombre());
 		
+		equipoaEditar.setCiudad(EquipoEditado.getCiudad());
+
+		
 		equipoDAO.modificarEquipoJPA(equipoaEditar);
 		
 		
