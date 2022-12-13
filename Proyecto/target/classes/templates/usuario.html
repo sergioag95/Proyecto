@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+	
+	<div th:insert="librerias::librerias"></div>
+	
+</head>
+<body>
+
+<div class="container"> 
+
+<header>
+
+	<div th:insert="top::top"></div>
+
+</header>
+
+
+<div class="row pl-5 pr-5">
+
+	<div class="col-9">
+		<h5> Ficha de usuario </h5>
+		
+		<div class="card border primary" th:object="${usuarioaMostrar}">
+			
+			<div class="card-body row pt-4 pb-4">
+				
+				<div class="col-7">
+					<div class="card">
+						<div class="card-header text-dark bg-light">Ficha del usuario</div>
+						<div class="card-body">
+							<div class="mb-2">
+								<a>Nombre:</a>
+								<h5 th:text="*{nombre}" class="mb-2 card-text">Nombre del usuario</h5>
+							</div>
+							<div class="mb-2">
+							
+								<a>Nombre de usuario:</a>
+								<h5 th:text="*{usuario}" class="mb-2 card-text">Nombre del usuario</h5>
+							</div>
+							<div class="mb-2">
+								<a>Rol:</a>
+								<h5 th:text="*{admin}" class="mb-2 card-text">Nombre del usuario</h5>
+							</div>
+							<p><a th:href="@{/usuarios}" class="btn btn-primary mt-3">Cerrar</a></p>
+						</div>
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+</div>	
+</body>

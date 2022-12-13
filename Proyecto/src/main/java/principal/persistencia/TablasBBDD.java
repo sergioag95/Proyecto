@@ -3,6 +3,7 @@ package principal.persistencia;
 import principal.modelo.Jugador;
 import principal.modelo.Equipo;
 import principal.modelo.Partido;
+import principal.modelo.Usuario;
 
 public class TablasBBDD {
 
@@ -13,7 +14,13 @@ public class TablasBBDD {
 		PartidoDAO partidoDAO = new PartidoDAO();
 		UsuarioDAO usuariosDAO = new UsuarioDAO();
 		
+		Usuario u1 = new Usuario();
 
+		u1.setNombre("Sergio");
+		u1.setUsuario("sergioag95");
+		
+		usuariosDAO.insertarUsuarioJPA(u1);
+		
 		Equipo e1= new Equipo ("Golden State Warriors");
 		Equipo e2= new Equipo ("Cleveland Cavaliers");
 		// Creamos Jugadores
