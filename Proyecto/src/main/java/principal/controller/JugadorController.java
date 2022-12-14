@@ -45,6 +45,8 @@ public class JugadorController{
 		Jugador jugadoraEditar = jugadorDAO.bucarPorIdJPA(id);
 		
 		jugadoraEditar.setNombre(JugadorEditado.getNombre());
+		jugadoraEditar.setEquipo(JugadorEditado.getEquipo());
+
 		
 		jugadorDAO.modificarJugadorJPA(jugadoraEditar);
 		
