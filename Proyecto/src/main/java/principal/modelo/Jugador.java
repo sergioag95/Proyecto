@@ -28,7 +28,7 @@ public class Jugador {
 	
 	
 	@Column(name = "dorsal")
-	private int dorsal;
+	private String dorsal;
 	
 	@Column(name = "posición")
 	private String posicion;
@@ -62,11 +62,11 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 
-	public int getDorsal() {
+	public String getDorsal() {
 		return dorsal;
 	}
 
-	public void setDorsal(int dorsal) {
+	public void setDorsal(String dorsal) {
 		this.dorsal = dorsal;
 	}
 

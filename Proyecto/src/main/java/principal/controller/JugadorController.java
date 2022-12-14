@@ -30,8 +30,8 @@ public class JugadorController{
 		
 		//Salir a buscar a la BBDD
 		
-		ArrayList<Jugador> misJugadors = jugadorDAO.listarJugadorsJPA();
-		model.addAttribute("listaJugadors", misJugadors);
+		ArrayList<Jugador> misJugadores = jugadorDAO.listarJugadorsJPA();
+		model.addAttribute("listaJugadores", misJugadores);
 		model.addAttribute("jugadoraEditar", new Jugador());
 		model.addAttribute("jugadorNuevo", new Jugador());
 		
@@ -45,7 +45,7 @@ public class JugadorController{
 		Jugador jugadoraEditar = jugadorDAO.bucarPorIdJPA(id);
 		
 		jugadoraEditar.setNombre(JugadorEditado.getNombre());
-		jugadoraEditar.setEquipo(JugadorEditado.getEquipo());
+		jugadoraEditar.setDorsal(JugadorEditado.getDorsal());
 
 		
 		jugadorDAO.modificarJugadorJPA(jugadoraEditar);

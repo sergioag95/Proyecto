@@ -93,7 +93,7 @@ public class PartidoDAO {
 	}
 	
 	public void imprimirPartido(ArrayList<Partido> misPartidos) {
-		System.out.println("Listado de pedidos");
+		System.out.println("El partido buscado es:");
 	 for (Partido b : misPartidos) {
 		 b.toString();
 	}	

@@ -93,7 +93,7 @@ public class EquipoDAO {
 	}
 	
 	public void imprimirEquipo(ArrayList<Equipo> misEquipos) {
-		System.out.println("Listado de pedidos");
+		System.out.println("El equipo buscado es:");
 	 for (Equipo b : misEquipos) {
 		 b.toString();
 	}	

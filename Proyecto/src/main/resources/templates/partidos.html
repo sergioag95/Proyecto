@@ -14,7 +14,7 @@
 
 </header>
 
-<h1>Usuarios en Spring</h1>
+<h1>Partidos en Spring</h1>
 
 
 	<!-- IMPRIMIR TABLA ALUMNOS -->
@@ -23,9 +23,10 @@
 		<thead class="table-dark bg-info text-white">
 			<tr>
 				<th> ID </th>
-				<th> Nombre </th>
-				<th> Nombre de Usuario </th>
-				<th> Rol </th>
+				<th> Visitante </th>
+				<th> Puntuación Visitante </th>
+				<th> Puntuación Local </th>
+				<th> Local </th>
 				<th> Editar </th>
 				<th> Borrar </th>
 			</tr>
@@ -35,43 +36,46 @@
 			
 		<!-- EL MEOLLO -->
 		
-			<tr th:if=" ${listaUsuarios.empty}">
-				<td colspan="2"> No hay usuarios</td>
+			<tr th:if=" ${listaPartidos.empty}">
+				<td colspan="2"> No hay partidos</td>
 			</tr>
 			
-			<tr th:each="usuario:${listaUsuarios}">
+			<tr th:each="partido:${listaPartidos}">
 			
 				<td>
-					<a th:href="@{/usuarios/{id}(id=${usuario.id})}" class="btn btn-primary btn-sm">
-						<span th:text="${usuario.id}"></span>
+					<a th:href="@{/partidos/{id}(id=${partido.id})}" class="btn btn-primary btn-sm">
+						<span th:text="${partido.id}"></span>
 					</a>
 				</td>
 				
 				<td>
-					<span th:text="${usuario.nombre}"></span>
+					<span th:text="${partido.visitante.nombre}"></span>
 				</td>
 				
 				<td>
-					<span th:text="${usuario.usuario}"></span>
+					<span th:text="${partido.visitante_res}"></span>
 				</td>
 				
 				<td>
-    				<span th:if="${usuario.admin == true}"><img src="https://cdn-icons-png.flaticon.com/512/616/616655.png"></span>
-    				<span th:if="${usuario.admin == false}"><img src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-person_90382.png"></span>
+					<span th:text="${partido.local_res}"></span>
 				</td>
 				
 				<td>
-					<a th:attr="data-target='#modal-edit'+${usuario.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
+					<span th:text="${partido.local.nombre}"></span>
 				</td>
 				
 				<td>
-					<a th:attr="data-target='#modal-delete'+${usuario.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+					<a th:attr="data-target='#modal-edit'+${partido.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
 				</td>
 				
+				<td>
+					<a th:attr="data-target='#modal-delete'+${partido.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
+				</td>
 				
-				<!--edit modal -->
+				<!--
+				<!-edit modal ->
 				
-				<div class="modal fade" th:id="modal-edit+${usuario.id}">
+				<div class="modal fade" th:id="modal-edit+${partido.id}">
 					
 				<div class="modal-dialog" role="document">
 				
@@ -90,33 +94,33 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text">Introduce el nombre nuevo para usuario/a:
-							<strong><span th:text="${usuario.nombre}"></span></strong>
+						<p class="error-text">Introduce el nombre nuevo para partido/a:
+							<strong><span th:text="${partido.nombre}"></span></strong>
 						</p>
 						
-						<!-- formulario nombre a editar -->
+						<!- formulario nombre a editar ->
 						
-						<form action="#" th:action="@{/usuarios/edit/{id}(id=${usuario.id})}" th:object="${usuarioaEditar}" method="post">
+						<form action="#" th:action="@{/partidos/edit/{id}(id=${partido.id})}" th:object="${partidoaEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
 									<label for="texto">Nombre</label>
-									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${usuario.nombre}"/>
+									<input type="text" :field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.nombre}"/>
 								
 								</div>
 								
 							</div>
 							
-						<p class="error-text">Introduce el nombre de usuario nuevo para usuario/a:
-							<strong><span th:text="${usuario.usuario}"></span></strong>
+						<p class="error-text">Introduce el nombre de partido nuevo para partido/a:
+							<strong><span th:text="${partido.partido}"></span></strong>
 						</p>
 						
-						<!-- formulario nombre a editar -->
+						<!- formulario nombre a editar ->
 						
-						<form action="#" th:action="@{/usuarios/edit/{id}(id=${usuario.id})}" th:object="${usuarioaEditar}" method="post">
+						<form action="#" th:action="@{/partidos/edit/{id}(id=${partido.id})}" th:object="${partidoaEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
-									<label for="texto">Nombre de Usuario</label>
-									<input type="text" th:field="*{usuario}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${usuario.usuario}"/>
+									<label for="texto">Nombre de Partido</label>
+									<input type="text" th:field="*{partido}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.partido}"/>
 								
 								</div>
 								
@@ -140,11 +144,11 @@
 				
 				</div>
 				
-				<!-- fin edit modal -->
+				<!- fin edit modal ->
 				
-				<!--delete modal -->
+				<!-delete modal ->
 				
-				<div class="modal fade" th:id="modal-delete+${usuario.id}">
+				<div class="modal fade" th:id="modal-delete+${partido.id}">
 					
 				<div class="modal-dialog" role="document">
 				
@@ -163,18 +167,18 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text"> ¿Está seguro de eliminar al usuario? :
-							<strong><span th:text="${usuario.nombre}"></span></strong>?
+						<p class="error-text"> ¿Está seguro de eliminar al partido? :
+							<strong><span th:text="${partido.nombre}"></span></strong>?
 						</p>
 						
-						<!-- formulario nombre a eliminar -->
+						<!- formulario nombre a eliminar ->
 						
 						
 					</div>
 							
 						<div class="modal-footer">
 							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
-							<a th:href="@{/usuarios/delete/{id}(id=${usuario.id})}">
+							<a th:href="@{/partidos/delete/{id}(id=${partido.id})}">
 								<span class="btn btn-danger btn-sm" value="delete"> Borrar </span>
 							</a>
 						</div>
@@ -184,7 +188,7 @@
 				</div>
 				</div>
 				
-				<!-- fin delete modal -->
+				<!- fin delete modal -->
 				
 			</tr>
 			
@@ -208,7 +212,7 @@
 		</div>
 	</div>
 	
-	<!--create modal -->
+	<!--create modal 
 				
 				<div class="modal fade" id="crearMensaje">
 					
@@ -218,7 +222,7 @@
 				
 					<div class="modal-header">
 					
-						<h4 class="modal-title" id="exampleModalLabel">Crear Usuario</h4>
+						<h4 class="modal-title" id="exampleModalLabel">Crear Partido</h4>
 						
 						<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="close">
 					
@@ -229,11 +233,11 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text">Introduce el nombre nuevo para nuevo usuario/a: </p>
+						<p class="error-text">Introduce el nombre nuevo para nuevo partido/a: </p>
 						
-						<!-- formulario nombre a editar -->
+						<!- formulario nombre a editar 
 						
-						<form action="#" th:action="@{/usuarios/add/}" th:object="${usuarioNuevo}" method="post">
+						<form action="#" th:action="@{/partidos/add/}" th:object="${partidoNuevo}" method="post">
 						
 							<div class="form-row"> 
 								<div class="form-group mt-1">
@@ -242,15 +246,6 @@
 								</div>
 								
 							</div>
-							
-							<div class="form-row"> 
-								<div class="form-group mt-1">
-									<label for="texto">Nombre de Usuario</label>
-									<input type="text" th:field="*{usuario}" class="form-control" id="exampleInputEmail1" placeholder="usuario"/>
-								</div>
-								
-							</div>
-							
 						</div>
 							
 						<div class="modal-footer">
@@ -267,16 +262,7 @@
 				
 				</div>
 				
-	<!-- fin create modal -->
+	<!-fin create modal -->
 	
 </div>	
 </body>
-
-<style>
-span img{
-	height:40px;
-}
-
-</style>
-
-

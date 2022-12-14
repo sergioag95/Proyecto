@@ -14,7 +14,7 @@
 
 </header>
 
-<h1>Jugadores en Spring</h1>
+<h1>Jugadors en Spring</h1>
 
 
 	<!-- IMPRIMIR TABLA ALUMNOS -->
@@ -24,6 +24,7 @@
 			<tr>
 				<th> ID </th>
 				<th> Nombre </th>
+				<th> Dorsal </th>
 				<th> Equipo </th>
 				<th> Editar </th>
 				<th> Borrar </th>
@@ -34,12 +35,14 @@
 			
 		<!-- EL MEOLLO -->
 		
-		
+			<tr th:if=" ${listaJugadores.empty}">
+				<td colspan="2"> No hay jugadores</td>
+			</tr>
 			
 			<tr th:each="jugador:${listaJugadores}">
 			
 				<td>
-					<a th:href="@{/jugador/{id}(id=${jugador.id})}" class="btn btn-primary btn-sm">
+					<a th:href="@{/jugadores/{id}(id=${jugador.id})}" class="btn btn-primary btn-sm">
 						<span th:text="${jugador.id}"></span>
 					</a>
 				</td>
@@ -49,7 +52,11 @@
 				</td>
 				
 				<td>
-					<span th:text="${jugador.equipo}"></span>
+					<span th:text="${jugador.dorsal}"></span>
+				</td>
+				
+					<td>
+					<span th:text="${jugador.equipo.id}"></span>
 				</td>
 				
 				<td>
@@ -82,13 +89,13 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text">Introduce el nombre nuevo para el jugador:
+						<p class="error-text">Introduce el nombre nuevo para jugador/a:
 							<strong><span th:text="${jugador.nombre}"></span></strong>
 						</p>
 						
 						<!-- formulario nombre a editar -->
 						
-						<form action="#" th:action="@{/jugador/edit/{id}(id=${jugador.id})}" th:object="${jugadoraEditar}" method="post">
+						<form action="#" th:action="@{/jugadores/edit/{id}(id=${jugador.id})}" th:object="${jugadoraEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
 									<label for="texto">Nombre</label>
@@ -98,27 +105,17 @@
 								
 							</div>
 							
-						<p class="error-text">Introduce el equipo nuevo para el jugador/a:
-							<strong><span th:text="${jugador.equipo}"></span></strong>
+						<p class="error-text">Introduce el dorsal nuevo para jugador/a:
+							<strong><span th:text="${jugador.nombre}"></span></strong>
 						</p>
 						
 						<!-- formulario nombre a editar -->
 						
-						<form action="#" th:action="@{/jugador/edit/{id}(id=${jugador.id})}" th:object="${jugadoraEditar}" method="post">
+						<form action="#" th:action="@{/jugadores/edit/{id}(id=${jugador.id})}" th:object="${jugadoraEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
-									<label for="texto">Equipo</label>
-									
-									
-									<select name="select" th:field="*{jugador}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${jugador.equipo}">
-									
-									 <option value="equipo:${listaEquipos}" th:each="equipo:${listaEquipos}"></option>
-									
-									</select>
-									
-									
-									
-									
+									<label for="texto">Dorsal</label>
+									<input type="number" th:field="*{dorsal}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${jugador.dorsal}"/>
 								
 								</div>
 								
@@ -127,7 +124,7 @@
 						
 						
 						</div>
-							
+						
 						<div class="modal-footer">
 							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
 							<input type="submit" value="Editar" class="btn btn-primary float-right"/>
@@ -141,6 +138,7 @@
 				</div>
 				
 				</div>
+				
 				
 				<!-- fin edit modal -->
 				
@@ -176,7 +174,7 @@
 							
 						<div class="modal-footer">
 							<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true"> Cancelar </button>
-							<a th:href="@{/jugador/delete/{id}(id=${jugador.id})}">
+							<a th:href="@{/jugadores/delete/{id}(id=${jugador.id})}">
 								<span class="btn btn-danger btn-sm" value="delete"> Borrar </span>
 							</a>
 						</div>
@@ -235,12 +233,22 @@
 						
 						<!-- formulario nombre a editar -->
 						
-						<form action="#" th:action="@{/jugador/add/}" th:object="${jugadorNuevo}" method="post">
+						<form action="#" th:action="@{/jugadores/add/}" th:object="${jugadorNuevo}" method="post">
 						
 							<div class="form-row"> 
 								<div class="form-group mt-1">
 									<label for="texto">Nombre</label>
 									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" placeholder="nombre"/>
+								</div>
+								
+								<div class="form-group mt-1">
+									<label for="texto">Equipo</label>
+									<input type="text" th:field="*{equipo.id}" class="form-control" id="exampleInputEmail1" placeholder="equipo"/>
+								</div>
+								
+								<div class="form-group mt-1">
+									<label for="texto">Dorsal</label>
+									<input type="text" th:field="*{dorsal}" class="form-control" id="exampleInputEmail1" placeholder="dorsal"/>
 								</div>
 								
 							</div>
@@ -264,5 +272,3 @@
 	
 </div>	
 </body>
-
-

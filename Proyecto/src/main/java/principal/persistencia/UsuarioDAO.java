@@ -93,7 +93,7 @@ public class UsuarioDAO {
 	}
 	
 	public void imprimirUsuario(ArrayList<Usuario> misUsuarios) {
-		System.out.println("Listado de pedidos");
+		System.out.println("El usuario buscado es:");
 	 for (Usuario b : misUsuarios) {
 		 b.toString();
 	}	

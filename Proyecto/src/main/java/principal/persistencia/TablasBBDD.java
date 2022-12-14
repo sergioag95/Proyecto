@@ -18,6 +18,7 @@ public class TablasBBDD {
 
 		u1.setNombre("Sergio");
 		u1.setUsuario("sergioag95");
+		u1.setAdmin(true);
 		
 		usuariosDAO.insertarUsuarioJPA(u1);
 		

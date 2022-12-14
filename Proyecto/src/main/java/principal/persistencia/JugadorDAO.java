@@ -93,7 +93,7 @@ public class JugadorDAO {
 	}
 	
 	public void imprimirJugador(ArrayList<Jugador> misJugadors) {
-		System.out.println("Listado de pedidos");
+		System.out.println("El jugador buscado es:");
 	 for (Jugador b : misJugadors) {
 		 b.toString();
 	}	

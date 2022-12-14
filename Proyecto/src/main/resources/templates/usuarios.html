@@ -25,6 +25,7 @@
 				<th> ID </th>
 				<th> Nombre </th>
 				<th> Nombre de Usuario </th>
+				<th> Rol </th>
 				<th> Editar </th>
 				<th> Borrar </th>
 			</tr>
@@ -52,6 +53,11 @@
 				
 				<td>
 					<span th:text="${usuario.usuario}"></span>
+				</td>
+				
+				<td>
+    				<span th:if="${usuario.admin == true}"><img src="https://cdn-icons-png.flaticon.com/512/616/616655.png"></span>
+    				<span th:if="${usuario.admin == false}"><img src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-person_90382.png"></span>
 				</td>
 				
 				<td>
@@ -236,6 +242,15 @@
 								</div>
 								
 							</div>
+							
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Nombre de Usuario</label>
+									<input type="text" th:field="*{usuario}" class="form-control" id="exampleInputEmail1" placeholder="usuario"/>
+								</div>
+								
+							</div>
+							
 						</div>
 							
 						<div class="modal-footer">
@@ -256,5 +271,12 @@
 	
 </div>	
 </body>
+
+<style>
+span img{
+	height:40px;
+}
+
+</style>
 
 
