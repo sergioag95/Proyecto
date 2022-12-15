@@ -72,8 +72,8 @@
 					<a th:attr="data-target='#modal-delete'+${partido.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
 				</td>
 				
-				<!--
-				<!-edit modal ->
+				
+				<!--edit modal -->
 				
 				<div class="modal fade" th:id="modal-edit+${partido.id}">
 					
@@ -94,37 +94,80 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text">Introduce el nombre nuevo para partido/a:
-							<strong><span th:text="${partido.nombre}"></span></strong>
+						<p class="error-text">Introduce el equipo visitante:
+							<strong><span th:text="${partido.visitante}"></span></strong>
 						</p>
 						
-						<!- formulario nombre a editar ->
+						<!-- formulario nombre a editar -->
 						
 						<form action="#" th:action="@{/partidos/edit/{id}(id=${partido.id})}" th:object="${partidoaEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
-									<label for="texto">Nombre</label>
-									<input type="text" :field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.nombre}"/>
+									<label for="texto">Visitante</label>
+									<select th:field="*{visitante}" class="form-control">
+									<option value=""> --- </option>
+							            <option th:each=equipo:${listaEquipos}
+							                    th:text="${equipo.nombre}"
+							                    th:value="${equipo.id}"></option>
+							        </select>
 								
 								</div>
 								
 							</div>
 							
-						<p class="error-text">Introduce el nombre de partido nuevo para partido/a:
-							<strong><span th:text="${partido.partido}"></span></strong>
+						<p class="error-text">Introduce el equipo local:
+							<strong><span th:text="${partido.visitante}"></span></strong>
 						</p>
 						
-						<!- formulario nombre a editar ->
+						<!-- formulario nombre a editar -->
 						
-						<form action="#" th:action="@{/partidos/edit/{id}(id=${partido.id})}" th:object="${partidoaEditar}" method="post">
 							<div class="form-row"> 
 								<div class="form-group mt-1">
-									<label for="texto">Nombre de Partido</label>
-									<input type="text" th:field="*{partido}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.partido}"/>
+									<label for="texto">Local</label>
+									<select th:field="*{local}" class="form-control">
+									<option value=""> --- </option>
+							            <option th:each=equipo:${listaEquipos}
+							                    th:text="${equipo.nombre}"
+							                    th:value="${equipo.id}"></option>
+							        </select>
+								
+								</div>
+								
+						<p class="error-text">Introduce la puntuacion para el equipo visitante: 
+							<strong><span th:text="${partido.visitante.nombre}"></span></strong>
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Puntuación Visitante</label>
+									<input type="number" th:field="*{visitante_res}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.visitante_res}"/>
 								
 								</div>
 								
 							</div>
+							
+						<p class="error-text">Introduce la puntuacion para el equipo local: 
+							<strong><span th:text="${partido.local.nombre}"></span></strong>
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Puntuación Local</label>
+									<input type="number" th:field="*{local_res}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${partido.local_res}"/>
+								
+								</div>
+								
+							</div>
+								
+							</div>
+							
+							
+							
+					
 						
 						
 						
@@ -144,9 +187,9 @@
 				
 				</div>
 				
-				<!- fin edit modal ->
+				<!-- fin edit modal -->
 				
-				<!-delete modal ->
+				<!--delete modal -->
 				
 				<div class="modal fade" th:id="modal-delete+${partido.id}">
 					
@@ -168,10 +211,10 @@
 					<div class="modal-body">
 					
 						<p class="error-text"> ¿Está seguro de eliminar al partido? :
-							<strong><span th:text="${partido.nombre}"></span></strong>?
+							<strong><span th:text="${partido.id}"></span></strong>?
 						</p>
 						
-						<!- formulario nombre a eliminar ->
+						<!-- formulario nombre a eliminar -->
 						
 						
 					</div>
@@ -188,7 +231,7 @@
 				</div>
 				</div>
 				
-				<!- fin delete modal -->
+				<!-- fin delete modal -->
 				
 			</tr>
 			
@@ -212,7 +255,7 @@
 		</div>
 	</div>
 	
-	<!--create modal 
+	<!--create modal -->
 				
 				<div class="modal fade" id="crearMensaje">
 					
@@ -233,17 +276,71 @@
 					
 					<div class="modal-body">
 					
-						<p class="error-text">Introduce el nombre nuevo para nuevo partido/a: </p>
-						
-						<!- formulario nombre a editar 
+						<p class="error-text">Introduce el equipo visitante:
+						</p>
+												
+						<!-- formulario nombre a editar  -->
 						
 						<form action="#" th:action="@{/partidos/add/}" th:object="${partidoNuevo}" method="post">
 						
 							<div class="form-row"> 
 								<div class="form-group mt-1">
-									<label for="texto">Nombre</label>
-									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" placeholder="nombre"/>
+									<label for="texto">Visitante</label>
+									<select th:field="*{visitante}" class="form-control">
+									<option value=""> --- </option>
+							            <option th:each=equipo:${listaEquipos}
+							                    th:text="${equipo.nombre}"
+							                    th:value="${equipo.id}"></option>
+							        </select>
+								
 								</div>
+								
+							</div>
+							
+						<p class="error-text">Introduce el equipo local:
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Local</label>
+									<select th:field="*{local}" class="form-control">
+									<option value=""> --- </option>
+							            <option th:each=equipo:${listaEquipos}
+							                    th:text="${equipo.nombre}"
+							                    th:value="${equipo.id}"></option>
+							        </select>
+								
+								</div>
+								
+						<p class="error-text">Introduce la puntuacion para el equipo visitante: 
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Puntuación Visitante</label>
+									<input type="number" th:field="*{visitante_res}" class="form-control" id="exampleInputEmail1" />
+								
+								</div>
+								
+							</div>
+							
+						<p class="error-text">Introduce la puntuacion para el equipo local: 
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto">Puntuación Local</label>
+									<input type="number" th:field="*{local_res}" class="form-control" id="exampleInputEmail1" />
+								
+								</div>
+								
+							</div>
 								
 							</div>
 						</div>
@@ -262,7 +359,7 @@
 				
 				</div>
 				
-	<!-fin create modal -->
+	<!--fin create modal -->
 	
 </div>	
 </body>

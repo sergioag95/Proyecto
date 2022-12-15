@@ -71,7 +71,7 @@ public class Equipo {
 
 	@Override
 	public String toString() {
-		return "Equipo [id=" + id + ", ciudad=" + ciudad + ", nombre=" + nombre + ", jugadores=" + jugadores + "]";
+		return "";
 	}
 	
 	

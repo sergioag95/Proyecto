@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import principal.modelo.Equipo;
 import principal.modelo.Partido;
+import principal.persistencia.EquipoDAO;
 import principal.persistencia.PartidoDAO;
 
 @RequestMapping("/partidos")
@@ -20,6 +22,7 @@ public class PartidoController{
 	
 	
 	PartidoDAO partidoDAO = new PartidoDAO();
+	EquipoDAO equipoDAO = new EquipoDAO();
 	
 	
 	
@@ -31,7 +34,9 @@ public class PartidoController{
 		//Salir a buscar a la BBDD
 		
 		ArrayList<Partido> misPartidos = partidoDAO.listarPartidosJPA();
+		ArrayList<Equipo> misEquipos = equipoDAO.listarEquiposJPA();
 		model.addAttribute("listaPartidos", misPartidos);
+		model.addAttribute("listaEquipos", misEquipos);
 		model.addAttribute("partidoaEditar", new Partido());
 		model.addAttribute("partidoNuevo", new Partido());
 		
