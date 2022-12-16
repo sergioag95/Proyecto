@@ -47,6 +47,8 @@ public class UsuarioController{
 		usuarioaEditar.setNombre(UsuarioEditado.getNombre());
 		
 		usuarioaEditar.setUsuario(UsuarioEditado.getUsuario());
+		
+		usuarioaEditar.setAdmin(UsuarioEditado.isAdmin());
 
 		
 		usuarioDAO.modificarUsuarioJPA(usuarioaEditar);

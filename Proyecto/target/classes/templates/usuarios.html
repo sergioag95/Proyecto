@@ -122,6 +122,20 @@
 								
 							</div>
 						
+						<p class="error-text">¿Es administrador el usuario?:
+							<strong><span th:text="${usuario.usuario}"></span></strong>
+						</p>
+						
+						<!-- formulario nombre a editar -->
+						
+						<form action="#" th:action="@{/usuarios/edit/{id}(id=${usuario.id})}" th:object="${usuarioaEditar}" method="post">
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto" >Administrador</label>
+									<input type="checkbox" name="admin" th:checked="*{admin}" th:field="*{admin}" style="padding:30px; cursor:pointer"/>								
+								</div>
+								
+							</div>
 						
 						
 						</div>
@@ -164,7 +178,7 @@
 					<div class="modal-body">
 					
 						<p class="error-text"> ¿Está seguro de eliminar al usuario? :
-							<strong><span th:text="${usuario.nombre}"></span></strong>?
+							<strong><span th:text="${usuario.usuario}"></span></strong>?
 						</p>
 						
 						<!-- formulario nombre a eliminar -->
@@ -250,6 +264,15 @@
 								</div>
 								
 							</div>
+							
+							<div class="form-row"> 
+								<div class="form-group mt-1">
+									<label for="texto" >Administrador</label>
+									<input type="checkbox" name="admin" th:checked="*{admin}" th:field="*{admin}" style="padding:30px; cursor:pointer"/>								
+								</div>
+								
+							</div>
+						
 							
 						</div>
 							

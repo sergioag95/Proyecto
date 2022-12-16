@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import principal.modelo.Equipo;
 import principal.modelo.Jugador;
+import principal.persistencia.EquipoDAO;
 import principal.persistencia.JugadorDAO;
 
 @RequestMapping("/jugadores")
@@ -20,7 +22,8 @@ public class JugadorController{
 	
 	
 	JugadorDAO jugadorDAO = new JugadorDAO();
-	
+	EquipoDAO equipoDAO = new EquipoDAO();
+
 	
 	
 	@GetMapping(value= {"","/"})
@@ -31,7 +34,10 @@ public class JugadorController{
 		//Salir a buscar a la BBDD
 		
 		ArrayList<Jugador> misJugadores = jugadorDAO.listarJugadorsJPA();
+		ArrayList<Equipo> misEquipos = equipoDAO.listarEquiposJPA();
+
 		model.addAttribute("listaJugadores", misJugadores);
+		model.addAttribute("listaEquipos", misEquipos);
 		model.addAttribute("jugadoraEditar", new Jugador());
 		model.addAttribute("jugadorNuevo", new Jugador());
 		
@@ -46,6 +52,9 @@ public class JugadorController{
 		
 		jugadoraEditar.setNombre(JugadorEditado.getNombre());
 		jugadoraEditar.setDorsal(JugadorEditado.getDorsal());
+		jugadoraEditar.setEquipo(JugadorEditado.getEquipo());
+		jugadoraEditar.setPosicion(JugadorEditado.getPosicion());
+
 
 		
 		jugadorDAO.modificarJugadorJPA(jugadoraEditar);
