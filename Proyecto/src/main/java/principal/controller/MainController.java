@@ -28,14 +28,6 @@ public class MainController {
 	@Autowired
 	private EquipoRepo equipoRepo;
 	
-	
-	@GetMapping("/jugadores")
-	String homejugadores() {
-		
-		return "jugadores";
-		
-	}
-	
 	@Autowired
 	private EquipoServiceImpl equipoService;
 	
