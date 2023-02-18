@@ -1,7 +1,10 @@
 package principal.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,8 +29,8 @@ public class Equipo {
 	@Column(name="nombre")
 	private String nombre;
 	
-	@OneToMany( mappedBy = "equipo", fetch = FetchType.EAGER)
-	private Set<Jugador> jugadores;
+	@OneToMany( mappedBy = "equipo", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
+	private List<Jugador> jugadores = new ArrayList<>();;
 
 	public Equipo() {
 
@@ -61,11 +64,11 @@ public class Equipo {
 		this.nombre = nombre;
 	}
 
-	public Set<Jugador> getJugadores() {
+	public List<Jugador> getJugadores() {
 		return jugadores;
 	}
 
-	public void setJugadores(Set<Jugador> jugadores) {
+	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
 

@@ -1,10 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>app</groupId>
-  <artifactId>DWES</artifactId>
+  <groupId>dwes</groupId>
+  <artifactId>dwes</artifactId>
+  <!-- Esto es nuevo-->
+  <packaging>war</packaging>
+  <!-- Esto es nuevo-->
   <version>0.0.1-SNAPSHOT</version>
-  <name>PruebaSpring</name>
-  
+  <name>dwes</name>
   <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -17,9 +19,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-	
-	
-	 	<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
@@ -27,14 +27,17 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-<!--
+
+		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
--->
+		
+		-->
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -45,7 +48,6 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -70,8 +72,7 @@
 	</dependency>
 
 
-
-<!-- 	<dependency>
+	<dependency>
 	  <groupId>org.springframework.boot</groupId>
 	  <artifactId>spring-boot-starter-security</artifactId>
 	</dependency>
@@ -79,15 +80,22 @@
 	  <groupId>org.springframework.security</groupId>
 	  <artifactId>spring-security-test</artifactId>
 	  <scope>test</scope>
-	</dependency> -->
-	
-	
-<!-- 	<dependency>
+	</dependency>
+
+
+	<dependency>
 	    <groupId>org.thymeleaf.extras</groupId>
-	    <artifactId>thymeleaf-extras.stringsecurity5</artifactId>
-	</dependency> -->
-
-
+	    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+	</dependency>
+	
+	<!-- Esto es nuevo-->
+	<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat -->
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-tomcat</artifactId>
+	    <version>3.0.2</version><!--$NO-MVN-MAN-VER$-->
+	</dependency>
+	<!-- Esto es nuevo-->
 
 	</dependencies>
 
@@ -105,7 +113,17 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- Esto es nuevo-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webappDirectory>/src/main/webapp</webappDirectory>
+				</configuration>
+			</plugin>
+			<!-- Esto es nuevo-->
 		</plugins>
 	</build>
-
+	
+	
 </project>
