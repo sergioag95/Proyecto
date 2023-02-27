@@ -5,7 +5,7 @@
 	<!-- Topbar -->
 	<!-- Topbar -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary bg-dark p-4">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Proyecto<span>&#x1F3C0;</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,8 +32,7 @@
     </div>
     <li sec:authorize="isAuthenticated()" class="nav-item text-light list-unstyled">
 						
-						<a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link text-light" aria-haspopup="true" aria-expanded="false">
 							 
 							 	Hola: <span sec:authentication = "principal.username" /> 
 						    
