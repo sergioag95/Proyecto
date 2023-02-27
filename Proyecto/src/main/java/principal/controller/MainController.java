@@ -20,7 +20,7 @@ public class MainController {
 	@GetMapping("/")
 	String home() {
 		
-		//crearTablas();
+		crearTablas();
 		return "index";
 		
 	}
