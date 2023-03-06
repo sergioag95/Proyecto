@@ -24,8 +24,10 @@
 				<th> ID </th>
 				<th> Ciudad </th>
 				<th> Nombre </th>
+				<li sec:authorize="isAuthenticated()" class="list-unstyled">
 				<th> Editar </th>
 				<th> Borrar </th>
+				</li>
 			</tr>
 			
 		</thead>
@@ -53,6 +55,8 @@
 					<span th:text="${equipo.nombre}"></span>
 				</td>
 				
+				<li sec:authorize="isAuthenticated()" class="list-unstyled">
+
 				<td>
 					<a th:attr="data-target='#modal-edit'+${equipo.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
 				</td>
@@ -60,6 +64,7 @@
 				<td>
 					<a th:attr="data-target='#modal-delete'+${equipo.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
 				</td>
+				</li>
 				
 				
 				<!--edit modal -->

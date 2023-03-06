@@ -26,8 +26,12 @@
 				<th> Dorsal </th>
 				<th> Posición </th>
 				<th> Equipo </th>
+				<li sec:authorize="isAuthenticated()" class="list-unstyled">
 				<th> Editar </th>
-				<th> Borrar </th>
+				</li>
+				<li sec:authorize="isAuthenticated()" class="list-unstyled">
+					<th> Borrar </th>
+				</li>
 			</tr>
 			
 		</thead>
@@ -63,6 +67,7 @@
 					<span th:text="${jugador.equipo.nombre}"></span>
 				</td>
 				
+				<li sec:authorize="isAuthenticated()" class="list-unstyled">
 				<td>
 					<a th:attr="data-target='#modal-edit'+${jugador.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
 				</td>
@@ -70,6 +75,7 @@
 				<td>
 					<a th:attr="data-target='#modal-delete'+${jugador.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-sm text-white pointer">Borrar</a>
 				</td>
+				</li>
 				
 				
 				<!--edit modal -->

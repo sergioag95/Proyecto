@@ -44,12 +44,12 @@ public class MainController {
 	public void crearTablas() {
 		
 	
-		
+		/*
 		Usuario u1 = new Usuario();
 
 		u1.setNombre("Sergio");
 		
-		usuarioService.insertarUsuario(u1);
+		usuarioService.insertarUsuario(u1);*/
 		
 		Equipo e1= new Equipo ("Golden State Warriors");
 		Equipo e2= new Equipo ("Cleveland Cavaliers");
